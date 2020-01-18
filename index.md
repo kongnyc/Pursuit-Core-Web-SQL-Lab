@@ -63,8 +63,8 @@ SELECT title FROM movies ORDER BY title ASC LIMIT 5;
 
 4.List the next five Pixar movies sorted alphabetically
 SELECT title FROM movies ORDER BY title ASC LIMIT 5 OFFSET 5;
-
-SQL Lesson 4: SQL Review: Simple SELECT Queries
+================================================================
+SQL Lesson 5: SQL Review: Simple SELECT Queries
 
 List all the Canadian cities and their populations
 SELECT city, population FROM north_american_cities WHERE country = 'Canada'
@@ -82,8 +82,13 @@ SELECT * FROM north_american_cities WHERE Country = "Mexico" ORDER BY population
 
 List the third and fourth largest cities (by population) in the United States and their population
 SELECT * FROM north_american_cities WHERE country='United States' ORDER BY population DESC LIMIT 2 OFFSET 2
-
+==================================================
 SQL Lesson 6: Multi-table queries with JOINs
-Find the domestic and international sales for each movie
-Show the sales numbers for each movie that did better internationally rather than domestically
-List all the movies by their ratings in descending order
+1. Find the domestic and international sales for each movie
+SELECT * FROM movies JOIN Boxoffice on id = Movie_id;
+
+2. Show the sales numbers for each movie that did better internationally rather than domestically
+SELECT * FROM movies JOIN Boxoffice on id = Movie_id WHERE International_sales > Domestic_sales;
+
+3. List all the movies by their ratings in descending order
+SELECT * FROM movies JOIN Boxoffice on id = Movie_id ORDER BY Rating DESC;

@@ -117,5 +117,49 @@ List all movies and their combined sales in millions of dollars
 SELECT *,(Domestic_sales+International_sales)/1000000  FROM movies join Boxoffice on ID=Movie_ID
 
 List all movies and their ratings in percent
+SELECT title, rating * 10 AS rating_percent
+SELECT title, rating*10 AS ratings_percent FROM movies JOIN boxoffice ON movies.id = boxoffice.movie_id;
 List all movies that were released on even number years
+SELECT title, year AS even_Year FROM movies JOIN boxoffice ON movies.id = boxoffice.movie_id WHERE year%2=0;
 ==================================================================
+SQL Lesson 10: Queries with aggregates (Pt. 1)
+Exercise 10 — Tasks
+Find the longest time that an employee has been at the studio ✓
+SELECT * FROM employees ORDER BY Years_employed DESC LIMIT 1;
+SELECT MAX(years_employed) as Max_years_employed
+FROM employees;
+For each role, find the average number of years employed by employees in that role
+SELECT role, AVG(years_employed) as Average_years_employed
+FROM employees
+GROUP BY role;
+Find the total number of employee years worked in each building
+SELECT building, SUM(years_employed) as Total_years_employed
+FROM employees
+GROUP BY building;
+==================================================================
+SQL Lesson 11: Queries with aggregates (Pt. 2)
+Exercise 11 — Tasks
+Find the number of Artists in the studio (without a HAVING clause) ✓
+SELECT role, COUNT(*) as Number_of_artists
+FROM employees
+WHERE role = "Artist";
+Find the number of Employees of each role in the studio ✓
+SELECT role, COUNT(*)
+FROM employees
+GROUP BY role;
+SELECT role,COUNT(role) FROM employees group by role
+Find the total number of years employed by all Engineers
+SELECT *, SUM(Years_employed) FROM employees WHERE ROLE='Engineer' GROUP BY role 
+==================================================================
+SQL Lesson 12: Order of execution of a Query
+Exercise 12 — Tasks
+Find the number of movies each director has directed
+SELECT Director,count(title) FROM movies group by director
+
+Find the total domestic and international sales that can be attributed to each director
+SELECT Director,SUM(Domestic_sales+International_sales) FROM movies JOIN Boxoffice on id=Movie_id group by director
+==================================================================
+SQL Lesson 13: Inserting rows
+Exercise 13 — Tasks
+Add the studio's new production, Toy Story 4 to the list of movies (you can use any director)
+Toy Story 4 has been released to critical acclaim! It had a rating of 8.7, and made 340 million domestically and 270 million internationally. Add the record to the BoxOffice table.

@@ -111,3 +111,11 @@ SELECT name, role FROM employees WHERE building is null
 2. Find the names of the buildings that hold no employees
 SELECT DISTINCT building_name FROM buildings LEFT JOIN employees ON building_name = building WHERE role IS NULL;
 ==================================================================
+SQL Lesson 9: Queries with expressions
+Exercise 9 — Tasks
+List all movies and their combined sales in millions of dollars
+SELECT *,(Domestic_sales+International_sales)/1000000  FROM movies join Boxoffice on ID=Movie_ID
+
+List all movies and their ratings in percent
+List all movies that were released on even number years
+==================================================================

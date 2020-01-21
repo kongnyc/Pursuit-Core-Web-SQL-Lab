@@ -1,3 +1,19 @@
+SQL ZOO;
+Modify it to show the population of Germany
+SELECT population FROM world
+  WHERE name = 'Germany'
+
+Show the name and the population for 'Sweden', 'Norway' and 'Denmark'.
+SELECT name, population FROM world
+  WHERE name IN ('Sweden', 'Norway', 'Denmark');
+
+countries with an area between 200,000 and 250,000.
+SELECT name, area FROM world
+  WHERE area BETWEEN 200000 AND 250000
+
+
+
+=======================================================
 SQL Lesson 1: SELECT queries 101
 Exercise 1 — Tasks
 1.Find the title of each film 
@@ -14,6 +30,7 @@ SELECT Title, Year FROM movies;
 
 5.Find all the information about each film
 SELECT * FROM movies;
+
 =======================================================
 //SQL Lesson 2: Queries with constraints (Pt. 1)
 Exercise 2 — Tasks
@@ -162,4 +179,62 @@ SELECT Director,SUM(Domestic_sales+International_sales) FROM movies JOIN Boxoffi
 SQL Lesson 13: Inserting rows
 Exercise 13 — Tasks
 Add the studio's new production, Toy Story 4 to the list of movies (you can use any director)
+INSERT INTO Movies VALUES (15, 'Toy Story 4', 'Any Name', 2020, 99);
 Toy Story 4 has been released to critical acclaim! It had a rating of 8.7, and made 340 million domestically and 270 million internationally. Add the record to the BoxOffice table.
+INSERT INTO boxoffice VALUES (4, 8.7, 340000000, 270000000);
+==================================================================
+SQL Lesson 14: Updating rows
+Exercise 14 — Tasks
+The director for A Bug's Life is incorrect, it was actually directed by John Lasseter ✓
+UPDATE movies
+SET Director = 'John Lasseter'
+WHERE id =2
+The year that Toy Story 2 was released is incorrect, it was actually released in 1999
+UPDATE movies
+SET Year = 1999
+WHERE id =3
+Both the title and director for Toy Story 8 is incorrect! The title should be "Toy Story 3" and it was directed by Lee Unkrich
+UPDATE movies
+SET Title = 'Toy Story 3', Director='Lee Unkrich'
+WHERE id =11
+==================================================================
+SQL Lesson 15: Deleting rows
+Exercise 15 — Tasks
+This database is getting too big, lets remove all movies that were released before 2005.
+DELETE FROM movies
+WHERE year<2005;
+Andrew Stanton has also left the studio, so please remove all movies directed by him.
+DELETE FROM movies
+WHERE Director="Andrew Stanton"
+==================================================================
+SQL Lesson 16: Creating tables
+Exercise 16 — Tasks
+Create a new table named Database with the following columns:
+– Name A string (text) describing the name of the database
+– Version A number (floating point) of the latest version of this database
+– Download_count An integer count of the number of times this database was downloaded
+This table has no constraints. 
+CREATE TABLE Database (
+    Name TEXT,
+    Version FLOAT,
+    Download_count INTEGER
+);
+==================================================================
+SQL Lesson 17: Altering tables
+Exercise 17 — Tasks
+Add a column named Aspect_ratio with a FLOAT data type to store the aspect-ratio each movie was released in.
+ALTER TABLE Movies
+  ADD COLUMN Aspect_ratio FLOAT DEFAULT 2.39;
+Add another column named Language with a TEXT data type to store the language that the movie was released in. Ensure that the default for this language is English.
+ALTER TABLE Movies
+  ADD COLUMN Language text DEFAULT "English";
+
+==================================================================
+SQL Lesson 18: Dropping tables
+Exercise 18 — Tasks
+We've sadly reached the end of our lessons, lets clean up by removing the Movies table
+DROP TABLE IF EXISTS movies
+And drop the BoxOffice table as well
+DROP TABLE IF EXISTS BoxOffice
+
+==================================================================
